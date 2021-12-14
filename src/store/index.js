@@ -37,6 +37,7 @@ export default new Vuex.Store({
       show: false,
       text: "",
     },
+    sorting: false,
   },
   mutations: {
     addTask(state, newTaskTitle) {
@@ -79,6 +80,9 @@ export default new Vuex.Store({
     },
     setSearch(state, value) {
       this.state.search = value;
+    },
+    toggleSorting(state) {
+      state.sorting = !state.sorting;
     },
   },
   actions: {
