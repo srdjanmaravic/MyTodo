@@ -2,6 +2,8 @@
 
 Simple todo app build with VueJS and Vuetefy
 
+[Live Version](https://schmidts-todo.netlify.app/#/)
+
 ## Project setup
 
 ```
