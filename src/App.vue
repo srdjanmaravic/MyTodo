@@ -5,7 +5,7 @@
         class="pa-4 pt-7"
         height="170"
         src="mountains.jpg"
-        gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
+        gradient="to top right, rgba(19,84,122,.6), rgba(128,208,199,.8)"
       >
         <v-avatar size="70" class="mb-2">
           <img src="Avatar.jpg" alt="Srdjan Maravic" />
@@ -35,12 +35,12 @@
       app
       dark
       prominent
-      height="170"
+      :height="$route.path === '/' ? '238' : '170'"
     >
       <template v-slot:img="{ props }">
         <v-img
           v-bind="props"
-          gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
+          gradient="to top right, rgba(19,84,122,.9), rgba(128,208,199,.9)"
         ></v-img>
       </template>
 
@@ -49,7 +49,12 @@
           <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
           <v-spacer></v-spacer>
           <search />
-          <v-btn :to="link.favourites" link icon>
+          <v-btn
+            :to="link.favourites"
+            link
+            icon
+            :disabled="$store.state.sorting"
+          >
             <v-icon>mdi-heart</v-icon>
           </v-btn>
         </v-row>
@@ -60,6 +65,9 @@
         </v-row>
         <v-row>
           <live-date-time />
+        </v-row>
+        <v-row v-if="$route.path === '/'">
+          <field-add-tasks />
         </v-row>
       </v-container>
     </v-app-bar>
@@ -75,6 +83,7 @@
 import Snackbar from "@/components/Shared/Snackbar.vue";
 import Search from "@/components/Tools/Search.vue";
 import LiveDateTime from "@/components/Tools/LiveDateTime.vue";
+import FieldAddTask from "@/components/Todo/FieldAddTask.vue";
 
 export default {
   data: () => ({
@@ -92,6 +101,10 @@ export default {
     snackbar: Snackbar,
     search: Search,
     "live-date-time": LiveDateTime,
+    "field-add-tasks": FieldAddTask,
+  },
+  mounted() {
+    this.$store.dispatch("getTasks");
   },
 };
 </script>
